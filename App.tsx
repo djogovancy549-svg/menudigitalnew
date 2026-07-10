@@ -514,7 +514,7 @@ export default function App() {
     return cart.reduce((sum, item) => sum + (item.menuItem.price * item.quantity), 0);
   }, [cart]);
 
-  const cartTax = 0; // Tax disabled per request
+  const cartTax = useMemo(() => 0, [cartSubtotal]); // Tax disabled per request
   const serviceCharge = cart.length > 0 ? 50 : 0; // Rp 50 flat application service fee
   const cartTotal = cartSubtotal + cartTax + serviceCharge;
 
