@@ -216,5 +216,7 @@ export const WARUNG_MENU_ITEMS: MenuItem[] = [
 ];
 
 export const TABLES_LIST = [
-  "Meja 1", "Meja 2", "Meja 3", "Meja 4", "Meja 5", "Meja 6", "Meja 7", "Meja 8", "Meja 9", "Meja 10", "Meja 11", "Meja 12", "Bawa Pulang (Takeaway)"
+  "Meja Apel", "Meja Mangga", "Meja Jeruk", "Meja Pisang", "Meja Anggur", "Meja Melon",
+  "Meja Lada", "Meja Ketumbar", "Meja Jahe", "Meja Kunyit", "Meja Lengkuas", "Meja Kemiri", 
+  "Bawa Pulang (Takeaway)"
 ];
