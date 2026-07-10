@@ -665,6 +665,21 @@ export default function App() {
     setActiveReceiptOrder(null);
   };
 
+  // Reset ALL Data (Orders & Balance) for a fresh start
+  const handleResetAllData = () => {
+    if (window.confirm("PERINGATAN SEBELUM MENGHAPUS!\n\nApakah Anda yakin ingin MENGHAPUS SELURUH DATA TRANSAKSI (Grafik & Riwayat) dan MERESET SALDO APLIKASI menjadi Rp 0?\n\nTindakan ini tidak bisa dibatalkan!")) {
+      setOrders([]);
+      setActiveReceiptOrder(null);
+      setAppBalance(0);
+      
+      const prefix = spreadsheetId ? `_${spreadsheetId}` : '';
+      localStorage.removeItem(`warung_orders${prefix}`);
+      localStorage.setItem(`warung_app_balance${prefix}`, '0');
+      alert("Seluruh data transaksi dan saldo berhasil direset!");
+    }
+  };
+
+
   return (
     <div className="min-h-screen bg-neutral-900 text-neutral-100 flex flex-col font-sans selection:bg-amber-500 selection:text-neutral-950">
       
@@ -1812,6 +1827,7 @@ export default function App() {
                 }}
                 appBalance={appBalance}
                 onUpdateBalance={(newVal) => setAppBalance(newVal)}
+                onResetAllData={handleResetAllData}
               />
             )}
           </div>

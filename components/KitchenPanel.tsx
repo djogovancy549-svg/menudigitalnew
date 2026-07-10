@@ -49,6 +49,7 @@ interface KitchenPanelProps {
   onUpdateBalance: (newBalance: number) => void;
   menuItems: MenuItem[];
   onToggleMenuItemAvailability: (id: number) => Promise<void>;
+  onResetAllData?: () => void;
 }
 
 export const KitchenPanel: React.FC<KitchenPanelProps> = ({ 
@@ -73,7 +74,8 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
   appBalance,
   onUpdateBalance,
   menuItems,
-  onToggleMenuItemAvailability
+  onToggleMenuItemAvailability,
+  onResetAllData
 }) => {
   const [activeTab, setActiveTab] = useState<'queue' | 'analytics' | 'tables' | 'billing' | 'menu'>('queue');
   const [copiedLink, setCopiedLink] = useState(false);
@@ -1296,6 +1298,17 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
                       <Lock className="w-3.5 h-3.5" />
                       <span>Keluar (Kunci Panel)</span>
                     </button>
+                    
+                    {onResetAllData && (
+                      <button
+                        type="button"
+                        onClick={onResetAllData}
+                        className="w-full mt-4 py-2 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-lg shadow-rose-900/20"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                        <span>HAPUS SEMUA DATA TRANSAKSI & SALDO</span>
+                      </button>
+                    )}
                   </div>
                 )}
               </div>
