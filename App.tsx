@@ -37,7 +37,9 @@ export default function App() {
     const saved = localStorage.getItem(`${key}${prefix}`);
     if (saved === null) return fallback;
     try {
-      return JSON.parse(saved);
+      const parsed = JSON.parse(saved);
+      if (parsed === null) return fallback;
+      return parsed;
     } catch (_) {
       return saved;
     }
