@@ -403,11 +403,6 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
 
   // Analytics Calculation
   const stats = useMemo(() => {
-    // Starting baseline seed data to make charts beautiful even if there are no orders yet!
-    const baselineRevenue = 450000;
-    const baselineOrders = 18;
-    const baselineCompleted = 16;
-
     const actualRevenue = orders
       .filter(o => o.status === 'Selesai')
       .reduce((sum, o) => sum + o.total, 0);
@@ -492,9 +487,9 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
       .slice(0, 4);
 
     return {
-      totalRevenue: baselineRevenue + actualRevenue,
-      totalOrders: baselineOrders + actualOrdersCount,
-      completedOrders: baselineCompleted + actualCompletedCount,
+      totalRevenue: actualRevenue,
+      totalOrders: actualOrdersCount,
+      completedOrders: actualCompletedCount,
       pieData,
       hourlyData,
       topItems
@@ -1034,7 +1029,6 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
               <span className="text-xs text-neutral-400 uppercase tracking-wider font-medium">Total Omzet Finansial</span>
               <div className="flex items-center gap-2">
                 <h3 className="text-xl md:text-2xl font-black text-white">{formatRupiah(stats.totalRevenue)}</h3>
-                <span className="text-[10px] text-emerald-500 bg-emerald-950 border border-emerald-900 px-1.5 py-0.2 rounded font-bold">+12%</span>
               </div>
               <p className="text-[10px] text-neutral-500 leading-snug">Pendapatan kotor akumulatif harian</p>
             </div>
@@ -1052,7 +1046,6 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
               <span className="text-xs text-neutral-400 uppercase tracking-wider font-medium">Pesanan Sukses Disaji</span>
               <div className="flex items-center gap-2">
                 <h3 className="text-xl md:text-2xl font-black text-emerald-400">{stats.completedOrders} Antrean</h3>
-                <span className="text-[10px] text-emerald-500 bg-emerald-950 border border-emerald-900 px-1.5 py-0.2 rounded font-bold">100%</span>
               </div>
               <p className="text-[10px] text-neutral-500 leading-snug">Disajikan tanpa kendala</p>
             </div>
