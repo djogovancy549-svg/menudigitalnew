@@ -685,8 +685,9 @@ export default function App() {
           </div>
 
           {/* VIEW SWITCHER */}
-          <div className="flex bg-neutral-900 border border-neutral-800 p-1 rounded-xl">
-            <button
+          <div className="flex items-center gap-2">
+            <div className="flex bg-neutral-900 border border-neutral-800 p-1 rounded-xl">
+              <button
               onClick={() => setCurrentView('customer')}
               className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all
                 ${currentView === 'customer' 
@@ -713,6 +714,24 @@ export default function App() {
                 <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse inline-block" />
               )}
             </button>
+            </div>
+
+            {/* Logout / Reset Customer */}
+            {currentView === 'customer' && (customerName || cart.length > 0 || tableNumber) && (
+              <button
+                onClick={() => {
+                  setCustomerName('');
+                  setTableNumber('');
+                  setCart([]);
+                  window.scrollTo(0, 0);
+                }}
+                className="flex items-center gap-1.5 px-3 py-1.5 bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 font-bold text-xs rounded-lg transition-colors border border-rose-500/20"
+                title="Selesai Memesan / Mulai Pemesanan Baru"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">Mulai Baru</span>
+              </button>
+            )}
           </div>
 
         </div>
@@ -1715,6 +1734,10 @@ export default function App() {
                 spreadsheetId={spreadsheetId}
                 isSyncingSheets={isSyncingSheets}
                 onSyncSheets={handleSyncSheets}
+                onClosePanel={() => {
+                  setIsAdminAuthenticated(false);
+                  setCurrentView('customer');
+                }}
                 googleUser={googleUser}
                 onLogoutGoogle={handleLogoutGoogle}
                 tables={tables}

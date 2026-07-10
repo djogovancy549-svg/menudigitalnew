@@ -38,6 +38,7 @@ interface KitchenPanelProps {
   onSyncSheets: () => Promise<void>;
   googleUser: any;
   onLogoutGoogle: () => void;
+  onClosePanel?: () => void;
   tables: string[];
   onUpdateTables: (newTables: string[]) => void;
   bankName: string;
@@ -64,6 +65,7 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
   onSyncSheets,
   googleUser,
   onLogoutGoogle,
+  onClosePanel,
   tables = [],
   onUpdateTables,
   bankName,
@@ -718,8 +720,18 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
             className={`flex items-center gap-1.5 px-3 py-2 bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 rounded-xl text-xs font-semibold text-neutral-200 transition-colors ${isSyncingSheets ? 'opacity-50 cursor-not-allowed' : ''}`}
           >
             <RefreshCw className={`w-3.5 h-3.5 ${isSyncingSheets ? 'animate-spin' : ''}`} />
-            <span>Sinkron</span>
+            <span className="hidden sm:inline">Sinkron</span>
           </button>
+          
+          {onClosePanel && (
+            <button
+              onClick={onClosePanel}
+              className="flex items-center gap-1.5 px-3 py-2 bg-rose-500/10 hover:bg-rose-500/20 text-rose-500 border border-rose-500/20 hover:border-rose-500/40 font-bold rounded-xl text-xs transition-colors"
+            >
+              <LogOut className="w-3.5 h-3.5" />
+              <span className="hidden sm:inline">Keluar Admin</span>
+            </button>
+          )}
 
           <button
             onClick={onOpenAddMenu}
