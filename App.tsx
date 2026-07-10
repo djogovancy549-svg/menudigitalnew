@@ -35,13 +35,14 @@ export default function App() {
   const getInitialStorageValue = (key: string, fallback: any) => {
     const prefix = initialSpreadsheetId ? `_${initialSpreadsheetId}` : '';
     const saved = localStorage.getItem(`${key}${prefix}`);
-    if (saved === null) return fallback;
+    if (saved === null || saved === undefined || saved === '') return fallback;
     try {
       const parsed = JSON.parse(saved);
       if (parsed === null) return fallback;
+      if (Array.isArray(fallback) && !Array.isArray(parsed)) return fallback;
       return parsed;
     } catch (_) {
-      return saved;
+      return fallback;
     }
   };
 
