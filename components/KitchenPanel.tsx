@@ -53,7 +53,7 @@ interface KitchenPanelProps {
 }
 
 export const KitchenPanel: React.FC<KitchenPanelProps> = ({ 
-  orders, 
+  orders = [], 
   onUpdateStatus, 
   onClearAll,
   onOpenAddMenu,
@@ -63,7 +63,7 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
   onSyncSheets,
   googleUser,
   onLogoutGoogle,
-  tables,
+  tables = [],
   onUpdateTables,
   bankName,
   bankAccount,
@@ -73,7 +73,7 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
   onUpdatePaymentSettings,
   appBalance,
   onUpdateBalance,
-  menuItems,
+  menuItems = [],
   onToggleMenuItemAvailability,
   onResetAllData
 }) => {
