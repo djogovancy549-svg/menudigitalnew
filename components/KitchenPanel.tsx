@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Order, CartItem, MenuItem, TopupRequest } from '../types';
+import { TABLES_LIST } from '../data';
 import { 
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, 
   PieChart, Pie, Cell, Legend, CartesianGrid 
@@ -389,10 +390,7 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
   };
 
   const handleResetTables = () => {
-    const defaultTables = [
-      "Meja 1", "Meja 2", "Meja 3", "Meja 4", "Meja 5", "Meja 6", "Meja 7", "Meja 8", "Meja 9", "Meja 10", "Meja 11", "Meja 12", "Bawa Pulang (Takeaway)"
-    ];
-    onUpdateTables(defaultTables);
+    onUpdateTables(TABLES_LIST);
   };
 
   // Filtered orders
@@ -1890,7 +1888,7 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
                 onClick={handleResetTables}
                 className="self-start md:self-auto px-3 py-1.5 bg-neutral-950 hover:bg-neutral-800 border border-neutral-800 hover:border-neutral-700 text-[11px] font-bold text-neutral-300 rounded-lg transition-colors"
               >
-                Kembalikan Default (Meja 1-12)
+                Kembalikan Default
               </button>
             </div>
 
