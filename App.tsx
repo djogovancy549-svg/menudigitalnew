@@ -514,7 +514,7 @@ export default function App() {
     return cart.reduce((sum, item) => sum + (item.menuItem.price * item.quantity), 0);
   }, [cart]);
 
-  const cartTax = useMemo(() => Math.round(cartSubtotal * 0.10), [cartSubtotal]); // 10% PB1 pajak warung
+  const cartTax = 0; // Tax disabled per request
   const serviceCharge = cart.length > 0 ? 50 : 0; // Rp 50 flat application service fee
   const cartTotal = cartSubtotal + cartTax + serviceCharge;
 
@@ -1195,10 +1195,7 @@ export default function App() {
                         <span>Subtotal Makanan:</span>
                         <span className="text-neutral-200">{formatRupiah(cartSubtotal)}</span>
                       </div>
-                      <div className="flex justify-between">
-                        <span>PB1 / Pajak (10%):</span>
-                        <span className="text-neutral-200">{formatRupiah(cartTax)}</span>
-                      </div>
+
                       <div className="flex justify-between text-[11px]">
                         <span>Biaya Layanan Aplikasi:</span>
                         <span className="text-neutral-200">{formatRupiah(serviceCharge)}</span>
@@ -1510,10 +1507,7 @@ export default function App() {
                               <span>Subtotal:</span>
                               <span>{formatRupiah(activeReceiptOrder.subtotal)}</span>
                             </div>
-                            <div className="flex justify-between">
-                              <span>Pajak (10%):</span>
-                              <span>{formatRupiah(activeReceiptOrder.tax)}</span>
-                            </div>
+
                             <div className="flex justify-between">
                               <span>Biaya Layanan Meja:</span>
                               <span>{formatRupiah(activeReceiptOrder.serviceCharge)}</span>

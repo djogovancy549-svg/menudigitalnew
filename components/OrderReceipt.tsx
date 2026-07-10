@@ -190,10 +190,7 @@ export const OrderReceipt: React.FC<OrderReceiptProps> = ({ order, onClose }) =>
                 <span>Subtotal:</span>
                 <span>{formatRupiah(order.subtotal)}</span>
               </div>
-              <div className="flex justify-between text-[11px] text-neutral-600">
-                <span>PB1 / Pajak (10%):</span>
-                <span>{formatRupiah(order.tax)}</span>
-              </div>
+
               <div className="flex justify-between text-[11px] text-neutral-600">
                 <span>Biaya Layanan Aplikasi:</span>
                 <span>{formatRupiah(order.serviceCharge)}</span>
