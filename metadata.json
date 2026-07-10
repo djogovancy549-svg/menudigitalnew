@@ -1,0 +1,6 @@
+{
+  "name": "Menu Warung Makan",
+  "description": "Aplikasi menu digital interaktif mandiri untuk warung kuliner tradisional Indonesia. Dilengkapi sistem pemesanan meja, keranjang kustom, kasir, struk termal cetak, simulasi pembayaran QRIS dinamis, serta dasbor dapur dengan grafik keuangan real-time.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
