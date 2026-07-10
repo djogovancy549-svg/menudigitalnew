@@ -55,7 +55,7 @@ export const OrderReceipt: React.FC<OrderReceiptProps> = ({ order, onClose }) =>
   };
 
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-10 pb-20 overflow-y-auto">
       <div className="bg-neutral-900 rounded-2xl max-w-md w-full border border-neutral-800 shadow-2xl overflow-hidden my-8 animate-in fade-in zoom-in duration-200">
         
         {/* Header Action bar */}

@@ -2280,7 +2280,7 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
 
       {/* FULL SCREEN BUKTI TRANSFER PREVIEW MODAL */}
       {viewingProofRequest && (
-        <div className="fixed inset-0 bg-neutral-950/90 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-in fade-in duration-250">
+        <div className="fixed inset-0 bg-neutral-950/90 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-10 pb-20 animate-in fade-in duration-250 overflow-y-auto">
           <div className="bg-neutral-900 border border-neutral-800 rounded-3xl w-full max-w-md p-6 relative shadow-2xl flex flex-col gap-4 animate-in zoom-in-95 duration-200">
             <button
               onClick={() => setViewingProofRequest(null)}

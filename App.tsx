@@ -1839,7 +1839,7 @@ export default function App() {
 
       {/* --- MODAL 1: ITEM CUSTOMIZER OPTIONS DIALOG --- */}
       {selectedCustomizeItem && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 overflow-y-auto">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-10 pb-20 overflow-y-auto">
           <div className="bg-neutral-950 border border-neutral-800 rounded-2xl max-w-md w-full max-h-[92vh] overflow-y-auto shadow-2xl my-auto animate-in fade-in zoom-in-95 duration-200 scrollbar-thin scrollbar-thumb-neutral-800">
             
             {/* Modal Heading Banner */}

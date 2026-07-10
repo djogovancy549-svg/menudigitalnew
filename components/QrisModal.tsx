@@ -38,7 +38,7 @@ export const QrisModal: React.FC<QrisModalProps> = ({ amount, orderId, onPayment
   };
 
   return (
-    <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-center justify-center p-4 overflow-y-auto">
+    <div className="fixed inset-0 bg-black/85 backdrop-blur-md z-50 flex items-start justify-center p-4 pt-10 pb-20 overflow-y-auto">
       <div className="bg-white text-neutral-900 rounded-2xl max-w-sm w-full max-h-[92vh] overflow-y-auto shadow-2xl border border-neutral-200 my-auto animate-in fade-in scale-in duration-200 scrollbar-thin scrollbar-thumb-neutral-300">
         
         {/* QRIS Header branding */}

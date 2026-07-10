@@ -122,7 +122,7 @@ export const AddMenuItemModal: React.FC<AddMenuItemModalProps> = ({ isOpen, onCl
   };
 
   return (
-    <div id="add-menu-modal" className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div id="add-menu-modal" className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-start justify-center p-4 pt-10 pb-20 overflow-y-auto">
       <div className="bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden shadow-2xl flex flex-col border border-stone-100">
         
         {/* Header */}
