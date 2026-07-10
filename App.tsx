@@ -13,10 +13,11 @@ import {
   ShoppingBag, Search, Utensils, Tag, Trash2, 
   Plus, Minus, ArrowRight, User, Hash, AlertCircle, 
   Sparkles, Coffee, Pizza, Cookie, Star, LayoutGrid, CheckCircle2,
-  Lock, ShieldAlert, Delete, RefreshCw, X, Clock, Flame, Check, ChevronRight, Receipt, Copy
+  Lock, ShieldAlert, Delete, RefreshCw, X, Clock, Flame, Check, ChevronRight, Receipt, Copy, LogOut
 } from 'lucide-react';
 
 // Import banner image generated earlier
+// @ts-ignore
 import bannerImage from './src/assets/images/warung_banner_1783565594622.jpg';
 
 export default function App() {
@@ -441,7 +442,7 @@ export default function App() {
     // Adjust price if option selections add to costs (e.g. +Rp 5.000)
     let addedPrice = 0;
     Object.values(customOptions).forEach(choice => {
-      const match = choice.match(/\(\+Rp\s*([\d.]+)\)/i);
+      const match = String(choice).match(/\(\+Rp\s*([\d.]+)\)/i);
       if (match) {
         addedPrice += parseInt(match[1].replace(/\./g, ''), 10);
       }
