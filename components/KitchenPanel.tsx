@@ -417,10 +417,10 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
 
     // Calculate category counts
     const categoriesSeed: { [key: string]: number } = {
-      'Makanan': 24,
-      'Minuman': 32,
-      'Cemilan': 12,
-      'Paket': 10
+      'Makanan': 0,
+      'Minuman': 0,
+      'Cemilan': 0,
+      'Paket': 0
     };
 
     orders.forEach(o => {
@@ -441,47 +441,42 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
 
     // Hourly flow data
     const hourlyData = [
-      { jam: '11:00', penjualan: 95000 + (orders.filter(o => {
+      { jam: '11:00', penjualan: orders.filter(o => {
         const date = new Date(o.timestamp);
         return date.getHours() === 11 && o.status === 'Selesai';
-      }).reduce((sum, o) => sum + o.total, 0)) },
-      { jam: '12:00', penjualan: 240000 + (orders.filter(o => {
+      }).reduce((sum, o) => sum + o.total, 0) },
+      { jam: '12:00', penjualan: orders.filter(o => {
         const date = new Date(o.timestamp);
         return date.getHours() === 12 && o.status === 'Selesai';
-      }).reduce((sum, o) => sum + o.total, 0)) },
-      { jam: '13:00', penjualan: 180000 + (orders.filter(o => {
+      }).reduce((sum, o) => sum + o.total, 0) },
+      { jam: '13:00', penjualan: orders.filter(o => {
         const date = new Date(o.timestamp);
         return date.getHours() === 13 && o.status === 'Selesai';
-      }).reduce((sum, o) => sum + o.total, 0)) },
-      { jam: '14:00', penjualan: 60000 + (orders.filter(o => {
+      }).reduce((sum, o) => sum + o.total, 0) },
+      { jam: '14:00', penjualan: orders.filter(o => {
         const date = new Date(o.timestamp);
         return date.getHours() === 14 && o.status === 'Selesai';
-      }).reduce((sum, o) => sum + o.total, 0)) },
-      { jam: '17:00', penjualan: 110000 + (orders.filter(o => {
+      }).reduce((sum, o) => sum + o.total, 0) },
+      { jam: '17:00', penjualan: orders.filter(o => {
         const date = new Date(o.timestamp);
         return date.getHours() === 17 && o.status === 'Selesai';
-      }).reduce((sum, o) => sum + o.total, 0)) },
-      { jam: '18:00', penjualan: 280000 + (orders.filter(o => {
+      }).reduce((sum, o) => sum + o.total, 0) },
+      { jam: '18:00', penjualan: orders.filter(o => {
         const date = new Date(o.timestamp);
         return date.getHours() === 18 && o.status === 'Selesai';
-      }).reduce((sum, o) => sum + o.total, 0)) },
-      { jam: '19:00', penjualan: 320000 + (orders.filter(o => {
+      }).reduce((sum, o) => sum + o.total, 0) },
+      { jam: '19:00', penjualan: orders.filter(o => {
         const date = new Date(o.timestamp);
         return date.getHours() === 19 && o.status === 'Selesai';
-      }).reduce((sum, o) => sum + o.total, 0)) },
-      { jam: '20:00', penjualan: 150000 + (orders.filter(o => {
+      }).reduce((sum, o) => sum + o.total, 0) },
+      { jam: '20:00', penjualan: orders.filter(o => {
         const date = new Date(o.timestamp);
         return date.getHours() === 20 && o.status === 'Selesai';
-      }).reduce((sum, o) => sum + o.total, 0)) },
+      }).reduce((sum, o) => sum + o.total, 0) },
     ];
 
-    // Top selling items catalog (hardcoded base + actual counts)
-    const topItemsMap: { [key: string]: number } = {
-      'Nasi Goreng Kampung': 12,
-      'Es Teh Manis Jumbo': 25,
-      'Ayam Goreng Korek': 10,
-      'Sate Ayam Madura': 8,
-    };
+    // Top selling items catalog (actual counts)
+    const topItemsMap: { [key: string]: number } = {};
 
     orders.forEach(o => {
       if (o.status === 'Selesai') {
