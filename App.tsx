@@ -388,33 +388,17 @@ export default function App() {
     });
   };
 
-  // PIN Keypad functions
-  const handlePinKeyPress = (digit: string) => {
-    setPinError(null);
-    if (pinInput.length < 4) {
-      const newVal = pinInput + digit;
-      setPinInput(newVal);
-      
-      // Auto-unlock when 4 digits are typed
-      if (newVal === "1234") {
-        setIsAdminAuthenticated(true);
-        setPinInput('');
-      } else if (newVal.length === 4) {
-        setPinError('PIN Admin tidak valid. Silakan coba lagi!');
-        setPinInput('');
-      }
+  // Password Submit Function
+  const handlePinSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (pinInput === "dapurku") {
+      setIsAdminAuthenticated(true);
+      setPinInput('');
+      setPinError(null);
+    } else {
+      setPinError('Kata sandi tidak valid. Silakan coba lagi!');
+      setPinInput('');
     }
-  };
-
-  const handlePinBackspace = () => {
-    if (pinInput.length > 0) {
-      setPinInput(pinInput.slice(0, -1));
-    }
-  };
-
-  const handlePinClear = () => {
-    setPinInput('');
-    setPinError(null);
   };
 
   // Filter Menu Items
@@ -1685,12 +1669,8 @@ export default function App() {
                 </div>
                 
                 <div className="text-center space-y-2 w-full">
-                  <h2 className="text-xl font-bold text-white tracking-tight">PIN Keamanan Admin</h2>
+                  <h2 className="text-xl font-bold text-white tracking-tight">Kata Sandi Admin</h2>
                   <p className="text-xs text-neutral-400">Masuk ke panel administrasi dapur dan kasir.</p>
-                  
-                  <span className="inline-block text-[10px] font-bold text-neutral-500 bg-neutral-900 border border-neutral-800 px-2 py-0.5 rounded-full mt-1">
-                    PIN default: 1234
-                  </span>
                 </div>
 
                 {pinError && (
@@ -1699,54 +1679,22 @@ export default function App() {
                   </div>
                 )}
 
-                {/* Passcode dots display */}
-                <div className="flex justify-center gap-4 py-3">
-                  {[0, 1, 2, 3].map((idx) => (
-                    <div 
-                      key={idx} 
-                      className={`w-3.5 h-3.5 rounded-full border transition-all duration-150
-                        ${pinInput.length > idx 
-                          ? 'bg-amber-500 border-amber-500 scale-110 shadow shadow-amber-500/40' 
-                          : 'bg-neutral-900 border-neutral-800'
-                        }`}
-                    />
-                  ))}
-                </div>
-
-                {/* Secure dial pad */}
-                <div className="grid grid-cols-3 gap-3 w-full max-w-[240px]">
-                  {['1', '2', '3', '4', '5', '6', '7', '8', '9'].map((num) => (
-                    <button
-                      key={num}
-                      onClick={() => handlePinKeyPress(num)}
-                      className="w-14 h-14 rounded-full bg-neutral-900 border border-neutral-800/80 hover:bg-neutral-800 text-base font-black text-white hover:text-amber-400 transition-all flex items-center justify-center shadow-sm"
-                    >
-                      {num}
-                    </button>
-                  ))}
-                  
+                <form onSubmit={handlePinSubmit} className="w-full space-y-4">
+                  <input
+                    type="password"
+                    value={pinInput}
+                    onChange={(e) => setPinInput(e.target.value)}
+                    placeholder="Masukkan kata sandi..."
+                    className="w-full bg-neutral-900 border border-neutral-800 focus:border-amber-500 rounded-xl px-4 py-3 text-white placeholder:text-neutral-600 focus:outline-none focus:ring-1 focus:ring-amber-500 transition-all text-center tracking-widest font-medium"
+                    autoFocus
+                  />
                   <button
-                    onClick={handlePinClear}
-                    className="w-14 h-14 rounded-full bg-neutral-950 text-neutral-500 hover:text-white text-xs font-semibold transition-colors flex items-center justify-center"
+                    type="submit"
+                    className="w-full py-3 bg-amber-500 hover:bg-amber-400 text-amber-950 font-bold rounded-xl transition-colors shadow-lg shadow-amber-500/20"
                   >
-                    Clear
+                    Buka Panel Admin
                   </button>
-                  
-                  <button
-                    onClick={() => handlePinKeyPress('0')}
-                    className="w-14 h-14 rounded-full bg-neutral-900 border border-neutral-800/80 hover:bg-neutral-800 text-base font-black text-white hover:text-amber-400 transition-all flex items-center justify-center shadow-sm"
-                  >
-                    0
-                  </button>
-                  
-                  <button
-                    onClick={handlePinBackspace}
-                    className="w-14 h-14 rounded-full bg-neutral-950 text-neutral-500 hover:text-white transition-colors flex items-center justify-center"
-                    aria-label="Delete"
-                  >
-                    <Delete className="w-5 h-5" />
-                  </button>
-                </div>
+                </form>
 
                 <button
                   onClick={() => setCurrentView('customer')}
