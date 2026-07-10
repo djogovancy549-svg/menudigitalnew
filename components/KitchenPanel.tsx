@@ -104,9 +104,15 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
   const [viewingProofRequest, setViewingProofRequest] = useState<TopupRequest | null>(null);
 
   const [topupRequests, setTopupRequests] = useState<TopupRequest[]>(() => {
-    const prefix = spreadsheetId ? `_${spreadsheetId}` : '';
-    const saved = localStorage.getItem(`warung_topup_requests${prefix}`);
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const prefix = spreadsheetId ? `_${spreadsheetId}` : '';
+      const saved = localStorage.getItem(`warung_topup_requests${prefix}`);
+      if (!saved) return [];
+      const parsed = JSON.parse(saved);
+      return Array.isArray(parsed) ? parsed : [];
+    } catch {
+      return [];
+    }
   });
 
   // Client-side image compression helper
