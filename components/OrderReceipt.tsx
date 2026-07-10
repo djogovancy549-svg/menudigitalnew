@@ -122,9 +122,21 @@ export const OrderReceipt: React.FC<OrderReceiptProps> = ({ order, onClose }) =>
 
             {/* Metadata */}
             <div className="text-xs space-y-1">
-              <div className="flex justify-between">
+              <div className="flex justify-between items-center">
                 <span>No. Invoice:</span>
-                <span className="font-bold">{order.id}</span>
+                <div className="flex items-center gap-1.5">
+                  <span className="font-bold">{order.id}</span>
+                  <button
+                    onClick={() => {
+                      navigator.clipboard.writeText(order.id);
+                      alert('Nomor Invoice berhasil disalin!');
+                    }}
+                    className="p-1 hover:bg-black/10 rounded transition-colors text-neutral-600 hover:text-black"
+                    title="Salin Nomor Invoice"
+                  >
+                    <Copy className="w-3 h-3" />
+                  </button>
+                </div>
               </div>
               <div className="flex justify-between">
                 <span>Tanggal:</span>
