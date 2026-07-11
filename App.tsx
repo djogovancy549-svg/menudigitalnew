@@ -49,7 +49,7 @@ export default function App() {
 
   // Dynamic Menu state
   const [menuItems, setMenuItems] = useState<MenuItem[]>(() => 
-    getInitialStorageValue('warung_menu_items', WARUNG_MENU_ITEMS)
+    getInitialStorageValue('warung_menu_items_v2', WARUNG_MENU_ITEMS)
   );
 
   // Admin PIN Protection states
@@ -226,7 +226,7 @@ export default function App() {
               const prefix = savedId ? `_${savedId}` : '';
               if (items && items.length > 0) {
                 setMenuItems(items);
-                localStorage.setItem(`warung_menu_items${prefix}`, JSON.stringify(items));
+                localStorage.setItem(`warung_menu_items_v2${prefix}`, JSON.stringify(items));
               }
               if (sheetTables && sheetTables.length > 0) {
                 setTables(sheetTables);
@@ -292,7 +292,7 @@ export default function App() {
       const prefix = result.spreadsheetId ? `_${result.spreadsheetId}` : '';
       if (result.menuItems.length > 0) {
         setMenuItems(result.menuItems);
-        localStorage.setItem(`warung_menu_items${prefix}`, JSON.stringify(result.menuItems));
+        localStorage.setItem(`warung_menu_items_v2${prefix}`, JSON.stringify(result.menuItems));
       }
 
       // Check if tables exist in sheet, if so load them, else write local tables to it!
@@ -381,7 +381,7 @@ export default function App() {
     setMenuItems(updatedMenu);
     
     const prefix = savedId ? `_${savedId}` : '';
-    localStorage.setItem(`warung_menu_items${prefix}`, JSON.stringify(updatedMenu));
+    localStorage.setItem(`warung_menu_items_v2${prefix}`, JSON.stringify(updatedMenu));
 
     setSyncNotification({
       type: 'success',
@@ -612,7 +612,7 @@ export default function App() {
       
       const savedId = localStorage.getItem('warung_spreadsheet_id');
       const prefix = savedId ? `_${savedId}` : '';
-      localStorage.setItem(`warung_menu_items${prefix}`, JSON.stringify(updated));
+      localStorage.setItem(`warung_menu_items_v2${prefix}`, JSON.stringify(updated));
       return updated;
     });
   };
