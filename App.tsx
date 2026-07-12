@@ -617,6 +617,23 @@ export default function App() {
     });
   };
 
+  const handleDeleteMenuItem = async (id: number) => {
+    setMenuItems(prev => {
+      const updated = prev.filter(item => item.id !== id);
+      const savedId = localStorage.getItem('warung_spreadsheet_id');
+      const prefix = savedId ? `_${savedId}` : '';
+      localStorage.setItem(`warung_menu_items_v2${prefix}`, JSON.stringify(updated));
+      return updated;
+    });
+  };
+
+  const handleDeleteAllMenuItems = async () => {
+    setMenuItems([]);
+    const savedId = localStorage.getItem('warung_spreadsheet_id');
+    const prefix = savedId ? `_${savedId}` : '';
+    localStorage.setItem(`warung_menu_items_v2${prefix}`, JSON.stringify([]));
+  };
+
   // Kitchen operations status updates
   const handleKitchenUpdateStatus = (
     orderId: string, 
@@ -1721,6 +1738,8 @@ export default function App() {
               <KitchenPanel 
                 menuItems={menuItems}
                 onToggleMenuItemAvailability={handleToggleMenuItemAvailability}
+                onDeleteMenuItem={handleDeleteMenuItem}
+                onDeleteAllMenuItems={handleDeleteAllMenuItems}
                 orders={orders} 
                 onUpdateStatus={handleKitchenUpdateStatus} 
                 onClearAll={handleClearKitchenOrders}

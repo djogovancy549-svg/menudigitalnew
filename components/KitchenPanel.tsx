@@ -51,6 +51,8 @@ interface KitchenPanelProps {
   onUpdateBalance: (newBalance: number) => void;
   menuItems: MenuItem[];
   onToggleMenuItemAvailability: (id: number) => Promise<void>;
+  onDeleteMenuItem?: (id: number) => Promise<void>;
+  onDeleteAllMenuItems?: () => Promise<void>;
   onResetAllData?: () => void;
 }
 
@@ -78,6 +80,8 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
   onUpdateBalance,
   menuItems = [],
   onToggleMenuItemAvailability,
+  onDeleteMenuItem,
+  onDeleteAllMenuItems,
   onResetAllData
 }) => {
   const [activeTab, setActiveTab] = useState<'queue' | 'analytics' | 'tables' | 'billing' | 'menu'>('queue');
@@ -732,6 +736,20 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
               <span className="hidden sm:inline">Keluar Admin</span>
             </button>
           )}
+          {onDeleteAllMenuItems && menuItems.length > 0 && (
+            <button
+              onClick={() => {
+                if (window.confirm("Yakin ingin menghapus SEMUA menu? Tindakan ini tidak bisa dibatalkan.")) {
+                  onDeleteAllMenuItems();
+                }
+              }}
+              className="flex items-center gap-1.5 px-4 py-2 bg-rose-500 hover:bg-rose-600 text-white font-bold rounded-xl text-xs transition-all shadow-md shadow-rose-500/10"
+              id="btn-delete-all-menus"
+            >
+              <Trash2 className="w-4 h-4" />
+              <span>Hapus Semua Data Menu</span>
+            </button>
+          )}
 
           <button
             onClick={onOpenAddMenu}
@@ -755,6 +773,7 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
                   <th className="py-3 px-4 text-xs font-semibold text-neutral-400 uppercase tracking-wider">Kategori</th>
                   <th className="py-3 px-4 text-xs font-semibold text-neutral-400 uppercase tracking-wider text-right">Harga</th>
                   <th className="py-3 px-4 text-xs font-semibold text-neutral-400 uppercase tracking-wider text-center">Status Tersedia</th>
+                  <th className="py-3 px-4 text-xs font-semibold text-neutral-400 uppercase tracking-wider text-center">Aksi</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-neutral-800">
@@ -787,6 +806,21 @@ export const KitchenPanel: React.FC<KitchenPanelProps> = ({
                       >
                         {item.isAvailable !== false ? '✅ Tersedia' : '❌ Habis'}
                       </button>
+                    </td>
+                    <td className="py-3 px-4 text-center">
+                      {onDeleteMenuItem && (
+                        <button
+                          onClick={() => {
+                            if (window.confirm(`Hapus menu "${item.name}"?`)) {
+                              onDeleteMenuItem(item.id);
+                            }
+                          }}
+                          className="p-1.5 bg-rose-500/10 text-rose-500 hover:bg-rose-500 hover:text-white rounded-lg transition-colors"
+                          title="Hapus Menu"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      )}
                     </td>
                   </tr>
                 ))}
